@@ -111,11 +111,7 @@ def process_document(file_path):
 if __name__ == "__main__":
     filepath = "example.pdf"  # Replace with your document
     output = process_document(filepath)
-    print("
-Generated Metadata:
-")
+    print("Generated Metadata:")
     for key, value in output.items():
-        print(f"{key}:
-{value}
-")
+        print(f"{key}:{value}")
 
