@@ -1,4 +1,3 @@
-pip install pytesseract
 import os
 import pytesseract
 import fitz  # PyMuPDF
