@@ -1,4 +1,3 @@
-pip install pytesseract
 import os
 import pytesseract
 import fitz  # PyMuPDF
@@ -9,15 +8,11 @@ import nltk
 import spacy
 from sklearn.feature_extraction.text import TfidfVectorizer
 from nltk.tokenize import sent_tokenize
-import pytesseract
-pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
-
 
 # Setup
+pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"  # Adjust this if needed
 nltk.download('punkt')
-nltk.download('punkt_tab') # Download the missing resource
 nlp = spacy.load("en_core_web_sm")
-pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"  # Update path if needed
 
 # ---------- Document Parsing Functions ----------
 
@@ -27,7 +22,7 @@ def extract_text_from_txt(file_path):
 
 def extract_text_from_docx(file_path):
     doc = docx.Document(file_path)
-    return "".join([para.text for para in doc.paragraphs])
+    return "\n".join([para.text for para in doc.paragraphs])
 
 def extract_text_from_pdf(file_path):
     text = ""
@@ -61,7 +56,7 @@ def extract_text(file_path):
 # ---------- Metadata Generation Functions ----------
 
 def extract_title(text):
-    lines = text.split("")
+    lines = text.split("\n")
     for line in lines:
         if line.strip() and len(line.strip().split()) >= 3:
             return line.strip()
@@ -111,9 +106,9 @@ def process_document(file_path):
 # ---------- Example Run ----------
 
 if __name__ == "__main__":
-    filepath = "example.pdf"  # Replace with your document
+    filepath = "example.pdf"  # Change this to your actual file
     output = process_document(filepath)
-    print("Generated Metadata:")
+    print("\nGenerated Metadata:\n")
     for key, value in output.items():
-        print(f"{key}:{value}")
+        print(f"{key}:\n{value}\n")
 
