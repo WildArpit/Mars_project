@@ -1,3 +1,12 @@
+import spacy
+import subprocess
+
+# Auto-download if not available
+try:
+    nlp = spacy.load("en_core_web_sm")
+except OSError:
+    subprocess.run(["python", "-m", "spacy", "download", "en_core_web_sm"])
+    nlp = spacy.load("en_core_web_sm")
 
 import streamlit as st
 import os
