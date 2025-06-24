@@ -1,15 +1,13 @@
 import spacy
-nlp = spacy.load("en_core_web_sm")
-import spacy
 import subprocess
 import importlib.util
 
-# Auto-download en_core_web_sm if not found
-try:
-    nlp = spacy.load("en_core_web_sm")
-except OSError:
-    subprocess.run(["python", "-m", "spacy", "download", "en_core_web_sm"])
-    nlp = spacy.load("en_core_web_sm")
+def ensure_spacy_model(model_name="en_core_web_sm"):
+    if importlib.util.find_spec(model_name) is None:
+        subprocess.run(["python", "-m", "spacy", "download", model_name])
+    return spacy.load(model_name)
+
+nlp = ensure_spacy_model("en_core_web_sm")
 
 import streamlit as st
 import os
