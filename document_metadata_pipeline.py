@@ -10,7 +10,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from nltk.tokenize import sent_tokenize
 
 # Setup
-pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"  # Adjust this if needed
+pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR"  # Adjust this if needed
 nltk.download('punkt')
 nlp = spacy.load("en_core_web_sm")
 
