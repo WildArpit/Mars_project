@@ -1,0 +1,9 @@
+streamlit
+pytesseract
+pillow
+python-docx
+pdf2image
+PyMuPDF
+spacy
+scikit-learn
+nltk
