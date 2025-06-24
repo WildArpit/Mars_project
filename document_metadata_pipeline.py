@@ -23,8 +23,7 @@ def extract_text_from_txt(file_path):
 
 def extract_text_from_docx(file_path):
     doc = docx.Document(file_path)
-    return "
-".join([para.text for para in doc.paragraphs])
+    return "".join([para.text for para in doc.paragraphs])
 
 def extract_text_from_pdf(file_path):
     text = ""
