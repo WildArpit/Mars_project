@@ -2,7 +2,7 @@
 import streamlit as st
 import os
 import tempfile
-from document_metadata import process_document
+from document_metadata_pipeline import process_document
 
 st.set_page_config(page_title="Document Metadata Extractor", layout="centered")
 
