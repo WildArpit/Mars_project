@@ -54,22 +54,7 @@ def extract_text(file_path):
         return "Unsupported file type."
 
 # ---------- Metadata Generation Functions ----------
-def extract_named_entities(text, nlp):
-    doc = nlp(text)
-    ...
-    
-def generate_metadata(text, nlp):
-    return {
-        "Title": extract_title(text),
-        "Summary": extract_summary(text),
-        "Keywords": list(extract_keywords(text)),
-        "Named Entities": extract_named_entities(text, nlp)
-    }
 
-def process_document(file_path, nlp):
-    ...
-    metadata = generate_metadata(text, nlp)
-    return metadata
 
 def extract_title(text):
     lines = text.split("\n")
@@ -91,23 +76,22 @@ def extract_keywords(text, num_keywords=5):
     keywords = vectorizer.get_feature_names_out()
     return keywords[:num_keywords]
 
-def extract_named_entities(text):
+def extract_named_entities(text, nlp):
     doc = nlp(text)
-    entities = {}
-    for ent in doc.ents:
-        if ent.label_ not in entities:
-            entities[ent.label_] = []
-        if ent.text not in entities[ent.label_]:
-            entities[ent.label_].append(ent.text)
-    return entities
-
-def generate_metadata(text):
+    ...
+    
+def generate_metadata(text, nlp):
     return {
         "Title": extract_title(text),
         "Summary": extract_summary(text),
         "Keywords": list(extract_keywords(text)),
-        "Named Entities": extract_named_entities(text)
+        "Named Entities": extract_named_entities(text, nlp)
     }
+
+def process_document(file_path, nlp):
+    ...
+    metadata = generate_metadata(text, nlp)
+    return metadata
 
 # ---------- Master Function ----------
 
