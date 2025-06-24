@@ -1,7 +1,10 @@
 import spacy
+nlp = spacy.load("en_core_web_sm")
+import spacy
 import subprocess
+import importlib.util
 
-# Auto-download if not available
+# Auto-download en_core_web_sm if not found
 try:
     nlp = spacy.load("en_core_web_sm")
 except OSError:
