@@ -57,8 +57,7 @@ def extract_text(file_path):
 # ---------- Metadata Generation Functions ----------
 
 def extract_title(text):
-    lines = text.split("
-")
+    lines = text.split("")
     for line in lines:
         if line.strip() and len(line.strip().split()) >= 3:
             return line.strip()
