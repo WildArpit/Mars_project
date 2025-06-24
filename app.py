@@ -1,21 +1,22 @@
 import spacy
 import subprocess
 import importlib.util
-
-def ensure_spacy_model(model_name="en_core_web_sm"):
-    if importlib.util.find_spec(model_name) is None:
-        subprocess.run(["python", "-m", "spacy", "download", model_name])
-    return spacy.load(model_name)
-
-nlp = ensure_spacy_model("en_core_web_sm")
-
 import streamlit as st
 import os
 import tempfile
-from document_metadata_pipeline import process_document
+from document_metadata_pipeline import process_document  # Make sure this file is in same directory
+
+# Auto-download spaCy model if needed
+def ensure_spacy_model(model_name="en_core_web_sm"):
+    try:
+        return spacy.load(model_name)
+    except OSError:
+        subprocess.run(["python", "-m", "spacy", "download", model_name])
+        return spacy.load(model_name)
+
+nlp = ensure_spacy_model()
 
 st.set_page_config(page_title="Document Metadata Extractor", layout="centered")
-
 st.title("📄 Automated Metadata Generator")
 st.write("Upload a document (PDF, DOCX, or TXT) and get auto-generated metadata.")
 
@@ -27,7 +28,7 @@ if uploaded_file is not None:
         tmp_path = tmp_file.name
 
     with st.spinner("Extracting metadata..."):
-        metadata = process_document(tmp_path)
+        metadata = process_document(tmp_path, nlp=nlp)
 
     if "Error" in metadata:
         st.error(metadata["Error"])
@@ -47,3 +48,4 @@ if uploaded_file is not None:
             st.markdown(f"**{label}:** {', '.join(ents)}")
 
     os.remove(tmp_path)
+
