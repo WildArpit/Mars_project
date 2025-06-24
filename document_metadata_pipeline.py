@@ -16,7 +16,7 @@ pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tessera
 nltk.download('punkt')
 nltk.download('punkt_tab') # Download the missing resource
 nlp = spacy.load("en_core_web_sm")
-pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR	esseract.exe"  # Update path if needed
+pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"  # Update path if needed
 
 # ---------- Document Parsing Functions ----------
 
